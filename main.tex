@@ -27,32 +27,121 @@ de Energ\'ia, Lima, Per\'u.}
 \maketitle
 
 \begin{abstract}
-Lorsqu'elle est appliquée aux systèmes de traitement de l'air, l'analyse exergétique se heurte à une complication liée au choix de l'état de référence de l'eau. Ce choix, qui peut de prime abord ressembler à un simple problème de convention d'écriture, peut cependant déboucher en pratique sur des résultats très différents, qui peuvent donner un image fausse des performances réelles des systèmes analysés. 
+	Lorsqu'elle est appliquée aux systèmes de traitement de l'air, l'analyse
+	exergétique se heurte à une complication liée au choix de l'état de
+	référence de l'eau. Ce choix, qui peut de prime abord ressembler à un
+	simple problème de convention d'écriture, peut cependant déboucher en
+	pratique sur des résultats très différents, qui peuvent donner un image
+	fausse des performances réelles des systèmes analysés.
 \end{abstract}
 
 \section{Introduction}
 
-Sa simplicité et sa pertinence ont fait passer au fil des décennies l'\emph{analyse exergétique} du statut de concept théorique à celui d'outil pratique d'ingénierie, voire même de support de vulgarisation \cite{SV-2013}. Dans certains cas cependant, son utilisation n’est pas si naturelle et requiert un travail de clarification supplémentaire. La manipulation de températures inférieures à celle de l’ambiance \cite{RGT-035-0651} ou l’exploitation de l’énergie solaire \cite{EPL-104-40008} sont des exemples bien connus de telles difficultés. Pour ce qui concerne les applications de traitement de l’air, le choix de \emph{l’état de référence de l’eau} (sur lequel nous allons revenir en détails dans la suite) est justement un de ceux ayant les plus lourdes conséquences sur les résultats finalement obtenus. De ce choix peuvent ainsi découler des opinions très différentes quant aux performances réelles des systèmes analysés. Nous allons aborder dans la suite de cet article l’importance d’un tel choix et, sur la base de résultats expérimentaux, présenter un aperçu de ses conséquences sur les performances estimées d’un système de traitement de l’air. L’objectif visé ici est d’aboutir à une convention relative à cet état de référence de l’eau, qui permette aux praticiens d’appliquer sereinement l’analyse exergétique aux systèmes de traitement de l’air, et de bénéficier pleinement de l’efficacité bien connue d’une telle approche.
+Sa simplicité et sa pertinence ont fait passer au fil des décennies
+l'\emph{analyse exergétique} du statut de concept théorique à celui d'outil
+pratique d'ingénierie, voire même de support de vulgarisation \cite{SV-2013}.
+Dans certains cas cependant, son utilisation n’est pas si naturelle et requiert
+un travail de clarification supplémentaire. La manipulation de températures
+inférieures à celle de l’ambiance \cite{RGT-035-0651} ou l’exploitation de
+l’énergie solaire \cite{EPL-104-40008} sont des exemples bien connus de telles
+difficultés. Pour ce qui concerne les applications de traitement de l’air, le
+choix de \emph{l’état de référence de l’eau} (sur lequel nous allons revenir en
+détails dans la suite) est justement un de ceux ayant les plus lourdes
+conséquences sur les résultats finalement obtenus. De ce choix peuvent ainsi
+découler des opinions très différentes quant aux performances réelles des
+systèmes analysés. Nous allons aborder dans la suite de cet article l’importance
+d’un tel choix et, sur la base de résultats expérimentaux, présenter un aperçu
+de ses conséquences sur les performances estimées d’un système de traitement de
+l’air. L’objectif visé ici est d’aboutir à une convention relative à cet état de
+référence de l’eau, qui permette aux praticiens d’appliquer sereinement
+l’analyse exergétique aux systèmes de traitement de l’air, et de bénéficier
+pleinement de l’efficacité bien connue d’une telle approche.
 
 \section{L'analyse exergétique}
 
-\subsection{L'exergie} Le second principe de la thermodynamique, d'après l'énoncé qu'en a fait \textsc{Clausius}, stipule qu'un échange de chaleur n'est possible qu'en présence de différents corps à différentes températures. Ainsi, pour qu'un tel échange de chaleur soit possible, et qu'il permette la production d'une certaine quantité de travail, au moins deux températures différentes sont nécessaires. De la même manière, il est aussi possible de produire du travail à l'aide de deux pressions différentes, ou de deux compositions chimiques différentes~\cite{Chambadal-1974}. C'est à partir de ce constat que l'on peut définir le concept d'exergie.
+\subsection{L'exergie} Une des conséquences, ou \emph{énoncé}, du second
+principe de la thermodynamique, est qu'une quantité de chaleur quelconque ne
+peut être échangée entre deux milieux différents si ceux-ci sont initialement à
+deux températures différentes. Cette quantité de chaleur peut ensuite être
+partiellement transformée en travail par le truchement de la variation de
+pression, puis de volume, de l'un de ces deux milieux. Il est possible aussi,
+via un effet osmotique par exemple, d'utiliser la différence de compositions
+chimiques entre deux milieux pour produire du travail. Ainsi, la quantité de
+travail qu'il est possible d'extraire d'une quantité donnée de matière est liée
+à sa différence de \emph{température}, de \emph{pression} et de
+\emph{composition chimique} dont elle dispose avec son milieu ambiant, milieu
+avec lequel elle finira toujours par atteindre un \emph{équilibre
+thermodynamique}.  (Cet équilibre thermodynamique est justement traduit en
+pratique par une égalité de la température, de la pression et de la composition
+chimique entre la quantité de matière en question et son milieu extérieur.)
+C'est à partir de ce constat que l'on peut définir le concept d'\emph{exergie}.
 
-\paragraph{Définition} L'\emph{exergie} est la quantité maximale de travail qu'il est possible d'extraire d'une quantité de matière donnée lorsque cette dernière évolue d'un état initial à un état final qui est celui de son milieu extérieur \cite{Chambadal-1974,TI-BE8015}.
+\paragraph{Définition} L'\emph{exergie} est la quantité maximale de travail
+qu'il est possible d'extraire d'une quantité de matière donnée lorsque cette
+dernière évolue d'un état initial quelconque à un état final qui est celui de
+son milieu extérieur.
 
 \bigskip
 
-D'après les explications précédentes, un objet de capacité thermique spécifique $c$, en $\mathrm{J/(kg \cdot K)}$, qui se trouve initialement à une température $T$ dans une ambiance à la température $T_0$ --- nous adopterons dans la suite la convention d'écriture la plus courante en exergie, qui consiste à noter d'un indice $0$ les grandeurs propres au milieu extérieur --- va pouvoir produire, à chaque fois que sa température s'abaisse d'une petite variation $dT$ et qu'il rejette une quantité élémentaire de chaleur $\delta q = c \cdot dT$, une quantité élémentaire de travail donnée par : \begin{equation}
-    \delta w = \delta q \cdot \left( 1 - \frac{T_0}{T} \right) = c \cdot dT \cdot \left( 1 - \frac{T_0}{T} \right)
-\end{equation} Tout au long de la décroissance de température entre $T$ et $T_0$, le travail ainsi extrait sera (en valeur absolue) égal à : \begin{equation}
-    \vert w_{\max} \vert = -\int_T^{T_0} c \cdot \left( 1 - \frac{T_0}{\vartheta} \right) \cdot d \vartheta = c \cdot \left[ (T - T_0) - T_0 \cdot \ln\left( \frac{T}{T_0} \right) \right] = c \cdot (T-T_0) \cdot \Theta_{\text{ml},0} \label{eq:exergie-th-0}
-\end{equation} Avec $\Theta=1-T_0/T$ que l'on appelle facteur de \textsc{Carnot} et qui, dans le cas de la relation \eqref{eq:exergie-th-0} précédente, est basé sur la \emph{température moyenne logarithmique} entre $T$ et $T_0$, notée $T_{\text{ml},0}$ : \begin{equation}
-    \Theta_{\text{ml},0} = 1 - \frac{T_0}{T_{\text{ml},0}} \text{ avec } T_{\text{ml},0} = \frac{T-T_0}{\ln(T/T_0)}
-\end{equation} La quantité de travail spécifique $\vert w_{\max} \vert$ dans l'équation \eqref{eq:exergie-th-0} est appelée \emph{exergie thermique} du corps de capacité thermique spécifique $c$.
+L'\emph{état} en question est représenté concrètement par un jeu de variables
+d'état: la \emph{température}, la \emph{pression} et les \emph{concentrations}
+respectives des éléments qui composent le système concerné. D'après les
+explications précédentes, une telle exergie est la somme de trois composantes :
+\begin{itemize}
+	\item l'\emph{exergie thermique} $Ex_{\text{therm}}$, due à la
+		différence entre la température $T$ du système de capacité
+		thermique $C$, et celle notée $T_0$ du milieu
+		extérieur\footnote{Nous adopterons dans la suite la
+		convention d'écriture la plus courante dans le domaine de
+		l'exergie, qui consiste à noter d'un indice $0$ les grandeurs
+		propres au milieu extérieur.}, est donnée
+		par~\cite{entropie-157-0013-0020}: \begin{equation}
+			Ex_{\text{therm}} = C \cdot (T-T_0) \cdot
+			\Theta_{\text{ml},0} \label{eq:exergie-th-0}
+		\end{equation} $\Theta=1-T_0/T$ est appelé facteur de
+		\textsc{Carnot} --- parce qu'il est égal au rendement (de
+		\textsc{Carnot}) d'un moteur thermique idéal fonctionnant entre
+		les deux températures $T_0$ et $T$ --- et s'écrit dans le cas de
+		l'équation \eqref{eq:exergie-th-0}, sous la forme:
+		\begin{equation}
+			\Theta_{\text{ml},0} = 1 - \frac{T_0}{T_{\text{ml},0}}
+			\text{ avec } T_{\text{ml},0} =
+			\frac{T-T_0}{\ln(T/T_0)}
+		\end{equation} $T_{\text{ml},0}$ est ici la bien connue
+		\emph{température moyenne logarithmique} entre $T$ et $T_0$;
+	\item l'\emph{exergie mécanique} $Ex_{\text{méca}}$, issue de la
+		différence de pression entre l'intérieur du système et le milieu
+		extérieur, et dont l'expression n'est autre que celle du travail
+		de détente isotherme à température $T_0$ de $p$ à
+		$p_0$~\cite{TI-BE8013} : \begin{equation}
+			Ex_{\text{méca}} = n \cdot \textsf{R} \cdot T_0 \cdot
+			\ln\left( \frac{p}{p_0} \right) \label{eq:exergie-m-0}
+		\end{equation} $n$ est ici la quantité molaire de matière mise
+		en jeu, et $\mathsf{R}$ est la constante universelle des gaz
+		parfaits;
+	\item l'\emph{exergie chimique} $Ex_{\text{chim}}$ qui existe tant que
+		la composition chimique interne du système est différente de
+		celle de son milieu extérieur. Elle s'exprime sous la forme
+		de~\cite{TI-BE8015} : \begin{equation}
+			Ex_{\text{chim}} = \sum_i n_i \cdot (\mu_i - \mu_{i,0})
+		\end{equation} Les indices $i$ correspondant à chacun des
+		composants du système, les $\mu_i$ étant leurs \emph{potentiels
+		chimiques} respectifs, pris à la température $T$ et à la
+		\emph{pression partielle} $p_i$ à l'intérieur du système, et à
+		la température $T_0$ et la pression partielle $p_{i,0}$ dans le
+		milieu extérieur.
+\end{itemize}
 
-L’état du milieu extérieur en question, appelé état de référence en analyse exergétique, est ici d’une importance fondamentale. Tout système énergétique interagit en effet, sous forme d’échanges de matière ou d'énergie, avec son milieu extérieur. Dans le cas d'un bâtiment par exemple, la nécessité de chauffer ou de refroidir l'air de ventilation, de l'humidifier ou de le déshumidifier, dépend de la température et de l'humidité extérieure. Réciproquement à la définition précédente, l'exergie est aussi la quantité minimale de travail qu'il faut échanger avec une quantité ou un flux d'énergie, pour les faire passer d'un état d'équilibre avec le milieu extérieur à un état d’état d'énergie plus élevée. Par état, on entend en pratique la température, la pression et la composition chimique.
+%Dans le cas d'un bâtiment par exemple, la nécessité de chauffer ou de refroidir
+%l'air de ventilation, de l'humidifier ou de le déshumidifier, dépend de la
+%température et de l'humidité extérieure. Réciproquement à la définition
+%précédente, l'exergie est aussi la quantité minimale de travail qu'il faut
+%échanger avec une quantité ou un flux d'énergie, pour les faire passer d'un état
+%d'équilibre avec le milieu extérieur à un état d’état d'énergie plus élevée. Par
+%état, on entend en pratique la température, la pression et la composition
+%chimique.
 
-\textsl{Les applications de traitement de l'air constituent un exemple très intéressant d'utilisation de l'analyse exergétique parce qu'elles consomment justement de l'air venant de l’extérieur, et dont l'exergie spécifique est nulle par définition.}
+%\textsl{Les applications de traitement de l'air constituent un exemple très intéressant d'utilisation de l'analyse exergétique parce qu'elles consomment justement de l'air venant de l’extérieur, et dont l'exergie spécifique est nulle par définition.}
 \printbibliography
 
 \end{document}
