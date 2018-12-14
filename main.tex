@@ -3,16 +3,19 @@
 \usepackage[french]{babel}
 \usepackage{fontspec,xunicode,xltxtra}
 \usepackage[width=17cm,height=25cm]{geometry}
-\usepackage{amsmath,amssymb,amsthm}
+\usepackage{amsmath,amssymb,amsthm,gensymb}
 \usepackage[auth-sc]{authblk}
 \usepackage{graphicx,xcolor}
 \usepackage{csquotes}
-\usepackage[style=numeric-comp, backend=biber,sorting=none,url=false,maxbibnames=99]{biblatex}
+\usepackage{booktabs,ltablex,numprint}
+\usepackage[style=numeric-comp, backend=biber, sorting=none, url=false, maxbibnames=99]{biblatex}
 \bibliography{biblio}
+\usepackage{multicol}
 \usepackage{hyperref}
 \hypersetup{colorlinks,pdftitle={},pdfauthor={A.~Vaudrey},citecolor=blue,filecolor=blue,linkcolor=blue,urlcolor=blue}
 
 \renewcommand*{\Affilfont}{\small\normalfont}
+\renewcommand*{\Authfont}{\normalsize\scshape}
 
 \title{Application pratique de l'analyse exergétique aux systèmes de traitement de l'air : le problème du choix de l'état de référence de l'eau}
 \author[1,2]{J. Chacon Chauca}
@@ -61,9 +64,9 @@ pleinement de l’efficacité bien connue d’une telle approche.
 
 \subsection{L'exergie} Une des conséquences, ou \emph{énoncé}, du second
 principe de la thermodynamique, est qu'une quantité de chaleur quelconque ne
-peut être échangée entre deux milieux différents si ceux-ci sont initialement à
+peut être échangée entre deux milieux différents que si ceux-ci sont initialement à
 deux températures différentes. Cette quantité de chaleur peut ensuite être
-partiellement transformée en travail par le truchement de la variation de
+partiellement transformée en travail grâce, par exemple, à la variation de
 pression, puis de volume, de l'un de ces deux milieux. Il est possible aussi,
 via un effet osmotique par exemple, d'utiliser la différence de compositions
 chimiques entre deux milieux pour produire du travail. Ainsi, la quantité de
@@ -76,43 +79,45 @@ pratique par une égalité de la température, de la pression et de la compositi
 chimique entre la quantité de matière en question et son milieu extérieur.)
 C'est à partir de ce constat que l'on peut définir le concept d'\emph{exergie}.
 
-\paragraph{Définition} L'\emph{exergie} est la quantité maximale de travail
+\paragraph{Définition} \textsl{L'exergie est la quantité maximale de travail
 qu'il est possible d'extraire d'une quantité de matière donnée lorsque cette
 dernière évolue d'un état initial quelconque à un état final qui est celui de
-son milieu extérieur.
+son milieu extérieur.}
 
 \bigskip
 
-L'\emph{état} en question est représenté concrètement par un jeu de variables
-d'état: la \emph{température}, la \emph{pression} et les \emph{concentrations}
-respectives des éléments qui composent le système concerné. D'après les
-explications précédentes, une telle exergie est la somme de trois composantes :
-\begin{itemize}
+L'\emph{état} dont il est question dans cette définition est représenté
+concrètement par un jeu de variables d'état: la \emph{température}, la
+\emph{pression} et les \emph{concentrations} de chacun des éléments qui
+composent le système concerné. D'après les explications précédentes, une telle
+exergie peut être exprimée comme la somme de trois composantes : \begin{itemize}
 	\item l'\emph{exergie thermique} $Ex_{\text{therm}}$, due à la
 		différence entre la température $T$ du système de capacité
-		thermique $C$, et celle notée $T_0$ du milieu
+		thermique $C$ en $\mathrm{J/K}$, et celle notée $T_0$ du milieu
 		extérieur\footnote{Nous adopterons dans la suite la
 		convention d'écriture la plus courante dans le domaine de
 		l'exergie, qui consiste à noter d'un indice $0$ les grandeurs
-		propres au milieu extérieur.}, est donnée
-		par~\cite{entropie-157-0013-0020}: \begin{equation}
+		propres au milieu extérieur. Une table des notations est par
+		ailleurs présentée en
+		page~\pageref{table-notations}.}~\cite{entropie-157-0013-0020} :
+		\begin{equation}
 			Ex_{\text{therm}} = C \cdot (T-T_0) \cdot
 			\Theta_{\text{ml},0} \label{eq:exergie-th-0}
 		\end{equation} $\Theta=1-T_0/T$ est appelé facteur de
-		\textsc{Carnot} --- parce qu'il est égal au rendement (de
-		\textsc{Carnot}) d'un moteur thermique idéal fonctionnant entre
-		les deux températures $T_0$ et $T$ --- et s'écrit dans le cas de
-		l'équation \eqref{eq:exergie-th-0}, sous la forme:
-		\begin{equation}
+		\textsc{Carnot} --- parce que son expression est identique à
+		celle du rendement (de \textsc{Carnot}) d'un moteur thermique
+		idéal fonctionnant entre les deux températures $T_0$ et $T$ ---
+		et s'écrit dans le cas de l'équation \eqref{eq:exergie-th-0},
+		sous la forme: \begin{equation}
 			\Theta_{\text{ml},0} = 1 - \frac{T_0}{T_{\text{ml},0}}
 			\text{ avec } T_{\text{ml},0} =
 			\frac{T-T_0}{\ln(T/T_0)}
-		\end{equation} $T_{\text{ml},0}$ est ici la bien connue
-		\emph{température moyenne logarithmique} entre $T$ et $T_0$;
+		\end{equation} $T_{\text{ml},0}$ est ici la \emph{température
+		moyenne logarithmique} de $T$ et $T_0$;
 	\item l'\emph{exergie mécanique} $Ex_{\text{méca}}$, issue de la
-		différence de pression entre l'intérieur du système et le milieu
-		extérieur, et dont l'expression n'est autre que celle du travail
-		de détente isotherme à température $T_0$ de $p$ à
+		différence de pression entre l'intérieur et l'extérieur du
+		système, et dont l'expression n'est autre que celle du travail
+		de détente isotherme (à température $T_0$) de $p$ à
 		$p_0$~\cite{TI-BE8013} : \begin{equation}
 			Ex_{\text{méca}} = n \cdot \textsf{R} \cdot T_0 \cdot
 			\ln\left( \frac{p}{p_0} \right) \label{eq:exergie-m-0}
@@ -124,13 +129,100 @@ explications précédentes, une telle exergie est la somme de trois composantes 
 		celle de son milieu extérieur. Elle s'exprime sous la forme
 		de~\cite{TI-BE8015} : \begin{equation}
 			Ex_{\text{chim}} = \sum_i n_i \cdot (\mu_i - \mu_{i,0})
-		\end{equation} Les indices $i$ correspondant à chacun des
-		composants du système, les $\mu_i$ étant leurs \emph{potentiels
-		chimiques} respectifs, pris à la température $T$ et à la
-		\emph{pression partielle} $p_i$ à l'intérieur du système, et à
-		la température $T_0$ et la pression partielle $p_{i,0}$ dans le
-		milieu extérieur.
-\end{itemize}
+		\end{equation} Les indices $i$ correspondent à chacun des
+		composants du système, représentant une quantité molaire $n_i$
+		(telle bien entendu que $\sum_i n_i = n$ avec la quantité $n$
+		qui est elle de la relation \eqref{eq:exergie-m-0}). Les $\mu_i$
+		sont les \emph{potentiels chimiques} de chacun de ces
+		composants, pris à la température $T$ et à la \emph{pression
+		partielle} $p_i$ à l'intérieur du système, et à la température
+		$T_0$ et la pression partielle $p_{i,0}$ dans le milieu
+		extérieur.
+\end{itemize} Ainsi, tout système thermodynamique composé des pressions
+partielles $p_i$ de différents éléments, le tout à la température $T$ et à la
+pression $p$ dispose, s'il se trouve dans un milieu extérieur pour lequel ces
+paramètres sont $p_{i,0}$, $T_0$ et $p_0$, dispose qu'une quantité d'énergie
+qu'il peut potentiellement échanger sous forme de travail avec ce dernier, qui
+s'écrit : \begin{equation}
+	Ex = Ex_{\text{therm}} + Ex_{\text{méca}} + Ex_{\text{chim}}
+\end{equation}
+
+% Courte explication sur l'utilité de l'exergie, de manière générale.
+
+\subsection{L'exergie de l'air humide} L'application du concept d'exergie au cas
+spécifique de l'\emph{air humide}, telle que formalisée initialement par
+\citeauthor{ASHRAE-1979}~\cite{ASHRAE-1979}, consiste ainsi à appliquer le
+raisonnement précédent au mélange d'air sec et de vapeur d'eau, considéré comme
+un mélange de gaz parfaits. En rapportant chaque quantité d'énergie à la masse
+d'air sec $m_a$ mise en jeu, comme c'est l'usage dans le domaine de l'air
+humide~\cite{TI-B2230}, on arrive à l'exergie spécifique thermique, d'après
+\eqref{eq:exergie-th-0} : \begin{equation}
+	ex_{\text{therm}} = \frac{Ex_{\text{therm}}}{m_a} = \left( c_{p,a} +
+	\omega \cdot c_{p,v} \right) \cdot (T-T_0) \cdot \Theta_{\text{ml},0}
+	\label{eq:exergie-th-1}
+\end{equation} $c_{p,a}$ et $c_{p,v}$ sont les capacités thermiques spécifiques
+à pression constante de l'air sec et de la vapeur d'eau (dont les valeurs
+numériques standards sont détaillées dans le
+tableau~\ref{tab:valeurs-reference}), et $\omega$ désigne ici l'humidité
+spécifique : \begin{equation}
+	\omega = \frac{m_v}{m_a} \label{eq:def-omega}
+\end{equation} En utilisant les mêmes notations, l'exergie mécanique spécifique
+de l'air humide s'écrit, d'après \eqref{eq:exergie-m-0} : \begin{equation}
+	ex_{\text{méca}} = (\mathsf{r}_a + \omega \cdot \mathsf{r}_v) \cdot T_0
+	\cdot \ln\left( \frac{p}{p_0} \right) \label{eq:exergie-m-1}
+\end{equation} Les termes $\mathsf{r}$ sont ici les constantes spécifiques
+massiques de chacun des composants du mélange gazeux, telles que $\mathsf{r}_i =
+\mathsf{R}/M_i$ avec $M_i$ la masse molaire de chacun de ces composants.
+\begin{table}[b]
+	\caption{Valeurs standards des propriétés physiques des composants de
+	l'air humide, à partir de \cite{TI-B2230}.}
+	\centering
+	\begin{tabular}{lcc}
+		\toprule
+		\textbf{Paramètre} & & \textbf{Valeur} \\
+		\midrule
+		Capacité thermique spécifique de l'air sec & $c_{p,a}$ &
+		$\numprint[kJ/(kg \cdot K)]{1.006}$ \\
+		Capacité thermique spécifique de la vapeur d'eau & $c_{p,v}$ &
+		$\numprint[kJ/(kg \cdot K)]{1.827}$ \\
+		\bottomrule
+	\end{tabular}
+	\label{tab:valeurs-reference}
+\end{table} Lorsqu'elle est appliquée à l'air humide, l'exergie spécifique
+chimique fait tout d'abord apparaître les pressions partielles de l'air sec et
+de la vapeur d'eau sous une forme très proche de celle de l'exergie mécanique
+\eqref{eq:exergie-m-0}, comme expliqué par exemple par
+\citeauthor{TI-BE8015}~\cite{TI-BE8015}. Pour des raisons pratiques, il est
+alors usuel de remplacer ces pressions partielles par le paramètre qui permet à
+lui seul de décrire la proportion d'air sec et de vapeur d'eau dans l'air
+humide, l'humidité spécifique. On arrive alors à : \begin{equation}
+	ex_{\text{chim}} = T_0 \cdot \left[ \omega \cdot \mathsf{r}_v \cdot
+	\ln\left( \frac{\omega}{\omega_0} \right) - (\mathsf{r}_a + \omega \cdot
+	\mathsf{r}_v) \cdot \ln\left( \frac{\omega+\alpha}{\omega_0+\alpha}
+	\right) \right] \label{eq:exergie-chim-1}
+\end{equation} $\alpha = \mathsf{r}_a/\mathsf{r}_v = M_v/M_a \simeq
+\numprint{0.622}$ est ici le rapport de la masse molaire de la vapeur d'eau à
+celle de l'air sec. Une démonstration complète de l'obtention de cette formule
+est présentée, quoique sous une forme légèrement différente, dans la référence
+\cite[page 213]{Bejan-2006}. En effet, en fonction des références consultées,
+l'exergie spécifique thermique \eqref{eq:exergie-th-1} est parfois exprimée sans
+faire appel spécifiquement à un facteur de \textsc{Carnot}, comme dans
+\cite{ASHRAE-1979,Bejan-2006}. Parfois, l'humidité spécifique $\omega$ est
+remplacée par son homologue molaire, notée souvent $\tilde{\omega} = n_v/n_a$.
+Quoi qu'il en soit, l'exergie spécifique massique de l'air humide peut s'écrire,
+d'après \eqref{eq:exergie-th-1}, \eqref{eq:exergie-m-1} et
+\eqref{eq:exergie-chim-1} : \begin{equation}
+	\begin{split}
+		ex = & \left( c_{p,a} + \omega \cdot c_{p,v} \right) \cdot
+		(T-T_0) \cdot \Theta_{\text{ml},0} + (\mathsf{r}_a + \omega
+		\cdot \mathsf{r}_v) \cdot T_0 \cdot \ln\left( \frac{p}{p_0}
+		\right) \\
+		& + T_0 \cdot \left[ \omega \cdot \mathsf{r}_v \cdot \ln\left(
+		\frac{\omega}{\omega_0} \right) - (\mathsf{r}_a + \omega \cdot
+		\mathsf{r}_v) \cdot \ln\left(
+		\frac{\omega+\alpha}{\omega_0+\alpha} \right) \right]
+	\end{split}
+\end{equation} 
 
 %Dans le cas d'un bâtiment par exemple, la nécessité de chauffer ou de refroidir
 %l'air de ventilation, de l'humidifier ou de le déshumidifier, dépend de la
@@ -141,7 +233,42 @@ explications précédentes, une telle exergie est la somme de trois composantes 
 %état, on entend en pratique la température, la pression et la composition
 %chimique.
 
-%\textsl{Les applications de traitement de l'air constituent un exemple très intéressant d'utilisation de l'analyse exergétique parce qu'elles consomment justement de l'air venant de l’extérieur, et dont l'exergie spécifique est nulle par définition.}
+%\textsl{Les applications de traitement de l'air constituent un exemple très
+%intéressant d'utilisation de l'analyse exergétique parce qu'elles consomment
+%justement de l'air venant de l’extérieur, et dont l'exergie spécifique est
+%nulle par définition.}
+
+\section*{Notations} \label{table-notations}
+
+\begin{multicols}{2}
+	\begin{tabbing}
+		\hspace{0.05\textwidth} \= \hspace{0.45\textwidth} \kill
+		$c_p$ \> Capacité thermique spécifique à \\
+		\> pression constante, en $\mathrm{J/(kg \cdot K)}$. \\
+		$C$ \> Capacité thermique, en $\mathrm{J/K}$. \\
+		$ex$ \> Exergie spécifique massique, en $\mathrm{J/kg}$. \\
+		$Ex$ \> Exergie, en $\mathrm{J}$. \\
+		$m$ \> Masse, en $\mathrm{kg}$. \\
+		$M$ \> Mass molaire, en $\mathrm{kg/m}^3$. \\
+		$n$ \> Quantité molaire, en $\mathrm{mol}$. \\
+		$p$ \> Pression, en $\mathrm{bar}$. \\
+		$\mathsf{r}$ \> Constante spécifique massique d'un \\
+		\> gaz parfait. \\
+		$\mathsf{R}$ \> Constante universelle des gaz parfaits. \\
+		$T$ \> Température, en $\degree\mathrm{C}$. \\
+		\> \textbf{Alphabet grec} \\
+		$\mu$ \> Potentiel chimique, en $\mathrm{J/mol}$. \\
+		$\omega$ \> Humidité spécifique, définie par
+		\eqref{eq:def-omega}. \\
+		$\Theta$ \> Facteur de \textsc{Carnot}. \\
+		\> \textbf{Indices} \\
+		$0$ \> Milieu extérieur au système. \\
+		$a$ \> Air sec. \\
+		ml \> Moyenne logarithmique. \\
+		$v$ \> Vapeur d'eau. \\
+	\end{tabbing}
+\end{multicols}
+
 \printbibliography
 
 \end{document}
