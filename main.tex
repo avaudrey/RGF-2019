@@ -3,81 +3,100 @@
 \usepackage[french]{babel}
 \usepackage{fontspec,xunicode,xltxtra}
 \usepackage[width=17cm,height=25cm]{geometry}
-\usepackage{amsmath,amssymb,amsthm,gensymb}
+\usepackage{amsmath,amssymb,amsthm,gensymb,xspace}
 \usepackage[auth-sc]{authblk}
 \usepackage{graphicx,xcolor}
 \usepackage{csquotes}
-\usepackage{booktabs,ltablex,numprint}
+\usepackage{booktabs,ltablex,numprint,multirow,colortbl}
 \usepackage[style=numeric-comp, backend=biber, sorting=none, url=false, maxbibnames=99]{biblatex}
 \bibliography{biblio}
 \usepackage{multicol}
 \usepackage{hyperref}
 \hypersetup{colorlinks,pdftitle={},pdfauthor={A.~Vaudrey},citecolor=blue,filecolor=blue,linkcolor=blue,urlcolor=blue}
 
+\newcommand{\dC}[1]{\numprint[\degree{\mathrm{C}}]{#1}}
 \renewcommand*{\Affilfont}{\small\normalfont}
 \renewcommand*{\Authfont}{\normalsize\scshape}
 
-\title{Application pratique de l'analyse exergétique aux systèmes de traitement de l'air : le problème du choix de l'état de référence de l'eau}
+\title{Application pratique de l'analyse exergétique aux systèmes de traitement
+de l'air : les pièges à éviter}
 \author[1,2]{J. Chacon Chauca}
 \author[3]{A. M. Quintanilla Muñoz}
-\author[2]{A. Vaudrey\thanks{Auteur correspondant : ECAM Lyon, Pôle Énergétique/LabECAM, 40 montée Saint-Barthélemy, 69321 Lyon CEDEX 05. Tél : +33 (0)4 72 77 06 30, \href{mailto:alexandre.vaudrey@ecam.fr}{alexandre.vaudrey@ecam.fr}, \href{http://orcid.org/0000-0002-8613-774X}{ORCID iD: 0000-0002-8613-774X}}\textsuperscript{,}}
+\author[1,2]{A. Vaudrey\thanks{Auteur correspondant : ECAM Lyon, Pôle Énergétique/LabECAM, 40 montée Saint-Barthélemy, 69321 Lyon CEDEX 05. Tél : +33 (0)4 72 77 06 30, \href{mailto:alexandre.vaudrey@ecam.fr}{alexandre.vaudrey@ecam.fr}, \href{http://orcid.org/0000-0002-8613-774X}{ORCID iD: 0000-0002-8613-774X}}\textsuperscript{,}}
 \affil[1]{Université de Lyon, ECAM Lyon, INSA-Lyon, LabECAM, F-69005, France.}
 \affil[2]{Pontificia Universidad Cat\'olica del Per\'u (PUCP), Laboratorio
-de Energ\'ia, Lima, Per\'u.}
+de Energ\'ia, Lima, Pérou.}
 \affil[3]{Département Énergie, Institut FEMTO-ST, UMR 6174, CNRS, Université de Bourgogne Franche-Comté, Belfort, France.}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-	Lorsqu'elle est appliquée aux systèmes de traitement de l'air, l'analyse
-	exergétique se heurte à une complication liée au choix de l'état de
-	référence de l'eau. Ce choix, qui peut de prime abord ressembler à un
-	simple problème de convention d'écriture, peut cependant déboucher en
-	pratique sur des résultats très différents, qui peuvent donner un image
-	fausse des performances réelles des systèmes analysés.
+	L'\emph{analyse exergétique} est un outil d'ingénierie à la fois simple
+	et efficace, qui fournit une image précise des performances énergétiques
+	des systèmes auxquels elle est appliquée. Son utilisation concrète sur
+	des installations en fonctionnement, \textsl{a fortiori} s'il s'agit de
+	systèmes de traitement de l'air, nécessite cependant de savoir
+	contourner certaines difficultés à la fois conceptuelles et
+	expérimentales. Cet article vise justement à proposer aux praticiens
+	intéressés des chemins permettant de contourner ces difficultés, et de
+	profiter pleinement de tous les avantages que l'analyse exergétique peut
+	apporter.
 \end{abstract}
+
+\tableofcontents
 
 \section{Introduction}
 
 Sa simplicité et sa pertinence ont fait passer au fil des décennies
 l'\emph{analyse exergétique} du statut de concept théorique à celui d'outil
-pratique d'ingénierie, voire même de support de vulgarisation \cite{SV-2013}.
-Dans certains cas cependant, son utilisation n’est pas si naturelle et requiert
-un travail de clarification supplémentaire. La manipulation de températures
-inférieures à celle de l’ambiance \cite{RGT-035-0651} ou l’exploitation de
-l’énergie solaire \cite{EPL-104-40008} sont des exemples bien connus de telles
-difficultés. Pour ce qui concerne les applications de traitement de l’air, le
-choix de \emph{l’état de référence de l’eau} (sur lequel nous allons revenir en
-détails dans la suite) est justement un de ceux ayant les plus lourdes
-conséquences sur les résultats finalement obtenus. De ce choix peuvent ainsi
-découler des opinions très différentes quant aux performances réelles des
-systèmes analysés. Nous allons aborder dans la suite de cet article l’importance
-d’un tel choix et, sur la base de résultats expérimentaux, présenter un aperçu
-de ses conséquences sur les performances estimées d’un système de traitement de
-l’air. L’objectif visé ici est d’aboutir à une convention relative à cet état de
-référence de l’eau, qui permette aux praticiens d’appliquer sereinement
-l’analyse exergétique aux systèmes de traitement de l’air, et de bénéficier
-pleinement de l’efficacité bien connue d’une telle approche.
+pratique d'ingénierie, et même de sujet de vulgarisation \cite{SV-2013}. Comme
+beaucoup d'autres types d'installations, les systèmes de traitement de l'air ont
+été l'objet depuis la fin des années 1970 d'études basées sur l'\emph{exergie},
+qui ont clairement démontré la pertinence d'une telle
+approche~\cite{Gaggioli-1978,ASHRAE-1979,ECM-021-0065}. Même si nombre
+d'articles, et même d'ouvrages~\cite{Dincer-2015}, ont été publiés depuis, très
+peu font clairement mention des difficultés pratiques auxquelles sont confrontés
+celles et ceux qui souhaitent appliquer l'analyse exergétique aux installations
+de traitement de l'air.
+
+Dans certains cas en effet, l'utilisation de l'approche exergétique n’est pas si
+naturelle, et requiert un travail de clarification supplémentaire. La
+manipulation de températures inférieures à celle de l’ambiance
+\cite{RGT-035-0651} ou l’exploitation de l’énergie solaire \cite{EPL-104-40008}
+sont des exemples bien connus de telles difficultés. Pour ce qui concerne les
+applications de traitement de l’air, le choix de \emph{l’état de référence de
+l’eau} (sur lequel nous allons revenir en détails dans la suite) est un exemple
+de difficulté ayant les plus lourdes conséquences sur les résultats finalement
+obtenus. De ce choix peuvent ainsi découler des opinions très différentes quant
+aux performances réelles des systèmes analysés. 
+
+%Nous allons aborder dans la suite de cet article l'importance d’un tel choix
+%et, sur la base de résultats expérimentaux, présenter un aperçu de ses
+%conséquences sur les performances estimées d’un système de traitement de l’air.
+%L’objectif visé ici est d’aboutir à une convention relative à cet état de
+%référence de l’eau, qui permette aux praticiens d’appliquer sereinement
+%l’analyse exergétique aux systèmes de traitement de l’air, et de bénéficier
+%pleinement de l’efficacité bien connue d’une telle approche.
 
 \section{L'analyse exergétique}
 
 \subsection{L'exergie} Une des conséquences, ou \emph{énoncé}, du second
 principe de la thermodynamique, est qu'une quantité de chaleur quelconque ne
-peut être échangée entre deux milieux différents que si ceux-ci sont initialement à
-deux températures différentes. Cette quantité de chaleur peut ensuite être
-partiellement transformée en travail grâce, par exemple, à la variation de
-pression, puis de volume, de l'un de ces deux milieux. Il est possible aussi,
-via un effet osmotique par exemple, d'utiliser la différence de compositions
-chimiques entre deux milieux pour produire du travail. Ainsi, la quantité de
-travail qu'il est possible d'extraire d'une quantité donnée de matière est liée
-à sa différence de \emph{température}, de \emph{pression} et de
-\emph{composition chimique} dont elle dispose avec son milieu ambiant, milieu
-avec lequel elle finira toujours par atteindre un \emph{équilibre
-thermodynamique}.  (Cet équilibre thermodynamique est justement traduit en
-pratique par une égalité de la température, de la pression et de la composition
-chimique entre la quantité de matière en question et son milieu extérieur.)
-C'est à partir de ce constat que l'on peut définir le concept d'\emph{exergie}.
+peut être échangée entre deux milieux différents que si ceux-ci sont
+initialement à deux températures différentes. Cette quantité de chaleur peut
+ensuite être partiellement transformée en travail grâce, par exemple, à la
+variation de pression, puis de volume, de l'un de ces deux milieux. Il est
+possible aussi, via un effet osmotique par exemple, d'utiliser la différence de
+compositions chimiques entre deux milieux pour produire du travail. Ainsi, la
+quantité de travail qu'il est possible d'extraire d'une quantité donnée de
+matière est liée à sa différence de \emph{température}, de \emph{pression} et de
+\emph{composition chimique} avec son milieu ambiant, milieu avec lequel elle
+finira toujours par atteindre un \emph{équilibre thermodynamique}. (Cet
+équilibre thermodynamique est justement traduit en pratique par une égalité de
+la température, de la pression et de la composition chimique entre la quantité
+de matière en question et son milieu extérieur.) C'est à partir de ce constat
+que l'on peut définir le concept d'\emph{exergie}.
 
 \paragraph{Définition} \textsl{L'exergie est la quantité maximale de travail
 qu'il est possible d'extraire d'une quantité de matière donnée lorsque cette
@@ -89,8 +108,9 @@ son milieu extérieur.}
 L'\emph{état} dont il est question dans cette définition est représenté
 concrètement par un jeu de variables d'état: la \emph{température}, la
 \emph{pression} et les \emph{concentrations} de chacun des éléments qui
-composent le système concerné. D'après les explications précédentes, une telle
-exergie peut être exprimée comme la somme de trois composantes : \begin{itemize}
+composent le système concerné~\cite{TI-BE8015} . D'après les explications
+précédentes, une telle exergie peut être exprimée comme la somme de trois
+composantes : \begin{itemize}
 	\item l'\emph{exergie thermique} $Ex_{\text{therm}}$, due à la
 		différence entre la température $T$ du système de capacité
 		thermique $C$ en $\mathrm{J/K}$, et celle notée $T_0$ du milieu
@@ -103,12 +123,12 @@ exergie peut être exprimée comme la somme de trois composantes : \begin{itemiz
 		\begin{equation}
 			Ex_{\text{therm}} = C \cdot (T-T_0) \cdot
 			\Theta_{\text{ml},0} \label{eq:exergie-th-0}
-		\end{equation} $\Theta=1-T_0/T$ est appelé facteur de
-		\textsc{Carnot} --- parce que son expression est identique à
-		celle du rendement (de \textsc{Carnot}) d'un moteur thermique
-		idéal fonctionnant entre les deux températures $T_0$ et $T$ ---
-		et s'écrit dans le cas de l'équation \eqref{eq:exergie-th-0},
-		sous la forme: \begin{equation}
+		\end{equation} $\Theta=1-T_0/T$ est un paramètre sans dimension
+		appelé facteur de \textsc{Carnot} --- parce que son expression
+		est identique à celle du rendement (de \textsc{Carnot}) d'un
+		moteur thermique idéal fonctionnant entre les deux températures
+		$T_0$ et $T$ --- et s'écrit dans le cas de l'équation
+		\eqref{eq:exergie-th-0}, sous la forme: \begin{equation}
 			\Theta_{\text{ml},0} = 1 - \frac{T_0}{T_{\text{ml},0}}
 			\text{ avec } T_{\text{ml},0} =
 			\frac{T-T_0}{\ln(T/T_0)}
@@ -123,7 +143,8 @@ exergie peut être exprimée comme la somme de trois composantes : \begin{itemiz
 			\ln\left( \frac{p}{p_0} \right) \label{eq:exergie-m-0}
 		\end{equation} $n$ est ici la quantité molaire de matière mise
 		en jeu, et $\mathsf{R}$ est la constante universelle des gaz
-		parfaits;
+		parfaits\footnote{On rappelle au passage que $\mathsf{R} =
+		\numprint[J/(mol \cdot K)]{8.3144486}$.};
 	\item l'\emph{exergie chimique} $Ex_{\text{chim}}$ qui existe tant que
 		la composition chimique interne du système est différente de
 		celle de son milieu extérieur. Elle s'exprime sous la forme
@@ -141,11 +162,14 @@ exergie peut être exprimée comme la somme de trois composantes : \begin{itemiz
 \end{itemize} Ainsi, tout système thermodynamique composé des pressions
 partielles $p_i$ de différents éléments, le tout à la température $T$ et à la
 pression $p$ dispose, s'il se trouve dans un milieu extérieur pour lequel ces
-paramètres sont $p_{i,0}$, $T_0$ et $p_0$, dispose qu'une quantité d'énergie
-qu'il peut potentiellement échanger sous forme de travail avec ce dernier, qui
-s'écrit : \begin{equation}
-	Ex = Ex_{\text{therm}} + Ex_{\text{méca}} + Ex_{\text{chim}}
-\end{equation}
+paramètres sont respectivement $p_{i,0}$, $T_0$ et $p_0$, dispose qu'une
+quantité d'énergie qu'il peut potentiellement échanger sous forme de travail
+avec ce dernier, son \emph{exergie}, qui s'écrit : \begin{equation}
+	Ex = Ex_{\text{therm}} + Ex_{\text{méca}} + Ex_{\text{chim}} \qquad
+	[\mathrm{J}]
+\end{equation} À noter que, comme pour l'énergie, il est possible de définir un
+taux d'échange d'exergie, ou \emph{puissance exergétique}, notée généralement
+$\dot{E}x$ et exprimée en W.
 
 % Courte explication sur l'utilité de l'exergie, de manière générale.
 
@@ -155,36 +179,40 @@ spécifique de l'\emph{air humide}, telle que formalisée initialement par
 raisonnement précédent au mélange d'air sec et de vapeur d'eau, considéré comme
 un mélange de gaz parfaits. En rapportant chaque quantité d'énergie à la masse
 d'air sec $m_a$ mise en jeu, comme c'est l'usage dans le domaine de l'air
-humide~\cite{TI-B2230}, on arrive à l'exergie spécifique thermique, d'après
-\eqref{eq:exergie-th-0} : \begin{equation}
+humide~\cite{TI-B2230}, on arrive à l'exergie spécifique thermique de l'air
+humide, d'après \eqref{eq:exergie-th-0} : \begin{equation}
 	ex_{\text{therm}} = \frac{Ex_{\text{therm}}}{m_a} = \left( c_{p,a} +
 	\omega \cdot c_{p,v} \right) \cdot (T-T_0) \cdot \Theta_{\text{ml},0}
 	\label{eq:exergie-th-1}
 \end{equation} $c_{p,a}$ et $c_{p,v}$ sont les capacités thermiques spécifiques
 à pression constante de l'air sec et de la vapeur d'eau (dont les valeurs
 numériques standards sont détaillées dans le
-tableau~\ref{tab:valeurs-reference}), et $\omega$ désigne ici l'humidité
-spécifique : \begin{equation}
+tableau~\ref{tab:valeurs-reference}), et $\omega$ est l'humidité spécifique
+définie par : \begin{equation}
 	\omega = \frac{m_v}{m_a} \label{eq:def-omega}
 \end{equation} En utilisant les mêmes notations, l'exergie mécanique spécifique
 de l'air humide s'écrit, d'après \eqref{eq:exergie-m-0} : \begin{equation}
-	ex_{\text{méca}} = (\mathsf{r}_a + \omega \cdot \mathsf{r}_v) \cdot T_0
-	\cdot \ln\left( \frac{p}{p_0} \right) \label{eq:exergie-m-1}
-\end{equation} Les termes $\mathsf{r}$ sont ici les constantes spécifiques
+	ex_{\text{méca}} = \frac{Ex_{\text{méca}}}{m_a} = (\mathsf{r}_a + \omega
+	\cdot \mathsf{r}_v) \cdot T_0 \cdot \ln\left( \frac{p}{p_0} \right)
+	\label{eq:exergie-m-1}
+\end{equation} Les termes $\mathsf{r}_i$ sont ici les constantes spécifiques
 massiques de chacun des composants du mélange gazeux, telles que $\mathsf{r}_i =
 \mathsf{R}/M_i$ avec $M_i$ la masse molaire de chacun de ces composants.
 \begin{table}[b]
-	\caption{Valeurs standards des propriétés physiques des composants de
-	l'air humide, à partir de \cite{TI-B2230}.}
+	\caption{Valeurs standards des propriétés physiques des deux composants
+	de l'air humide, d'après \citeauthor{TI-B2230}~\cite{TI-B2230}.}
 	\centering
-	\begin{tabular}{lcc}
+	\begin{tabular}{ln{2}{5}n{2}{5}}
 		\toprule
-		\textbf{Paramètre} & & \textbf{Valeur} \\
+		& \textbf{Air sec} & \textbf{Vapeur d'eau} \\
 		\midrule
-		Capacité thermique spécifique de l'air sec & $c_{p,a}$ &
-		$\numprint[kJ/(kg \cdot K)]{1.006}$ \\
-		Capacité thermique spécifique de la vapeur d'eau & $c_{p,v}$ &
-		$\numprint[kJ/(kg \cdot K)]{1.827}$ \\
+		Masse molaire $M$, en $[\mathrm{g/mol}]$ & $28.965$ & $18.016$ \\
+		Constante spécifique massique $\mathsf{r}$, en $\mathrm{kJ/(kg \cdot
+		K)}$ & $0.28705$ & $0.46151$ \\
+		Capacité thermique spécifique $c_p$, en $\mathrm{kJ/(kg \cdot
+		K)}$ & $1.006$ & $1.827$  \\
+		Rapport des masses molaires $\alpha = M_v/M_a$ &
+		\multicolumn{2}{c}{$\numprint{0.622}$} \\
 		\bottomrule
 	\end{tabular}
 	\label{tab:valeurs-reference}
@@ -195,7 +223,8 @@ de la vapeur d'eau sous une forme très proche de celle de l'exergie mécanique
 \citeauthor{TI-BE8015}~\cite{TI-BE8015}. Pour des raisons pratiques, il est
 alors usuel de remplacer ces pressions partielles par le paramètre qui permet à
 lui seul de décrire la proportion d'air sec et de vapeur d'eau dans l'air
-humide, l'humidité spécifique. On arrive alors à : \begin{equation}
+humide : l'humidité spécifique $\omega$. On arrive alors à l'expression :
+\begin{equation}
 	ex_{\text{chim}} = T_0 \cdot \left[ \omega \cdot \mathsf{r}_v \cdot
 	\ln\left( \frac{\omega}{\omega_0} \right) - (\mathsf{r}_a + \omega \cdot
 	\mathsf{r}_v) \cdot \ln\left( \frac{\omega+\alpha}{\omega_0+\alpha}
@@ -221,8 +250,54 @@ d'après \eqref{eq:exergie-th-1}, \eqref{eq:exergie-m-1} et
 		\frac{\omega}{\omega_0} \right) - (\mathsf{r}_a + \omega \cdot
 		\mathsf{r}_v) \cdot \ln\left(
 		\frac{\omega+\alpha}{\omega_0+\alpha} \right) \right]
-	\end{split}
-\end{equation} 
+	\end{split} \label{eq:exergie-specifique}
+\end{equation} La différence de température $T-T_0$ n'a ainsi d'influence que
+sur la fraction \og thermique \fg de l'exergie spécifique, tout comme la
+différence de pression $p-p_0$ n'a d'effet que sur sa fraction \og mécanique
+\fg. Une quelconque variation de l'humidité spécifique $\omega-\omega_0$ au
+contraire, influence tout les types d'exergie de l'air humide. Un exemple
+d'influence de la température et de la pression sur l'exergie spécifique de
+l'air humide est présenté dans le tableau~\ref{tab:exemple-calcul-1}.
+\begin{table}[t]
+	\caption{Partant d'un air extérieur à $T_0 = \dC{0}$, $p_0 =
+	\numprint[atm]{1}$ et $\varphi_0 = 80\%$ en hiver, puis d'un autre air
+	extérieur à $T_0 = \dC{30}$, $p_0 = \numprint[atm]{1}$ et $\varphi_0 =
+	40\%$ en été, $\Delta T = T-T_0$ et $\Delta p = p-p_0$ sont les
+	variations de température et de pression auxquelles l'air humide doit
+	être soumis pour faire varier son exergie spécifique, telle que définie
+	par \eqref{eq:exergie-specifique}, de la valeur indiquée $\Delta ex$.
+	$\mathrm{mm}_{\text{CE}}$ est ici le millimètre de colonne d'eau.}
+	\centering
+	\begin{tabular}{n{1}{2}n{2}{2}n{3}{2}n{2}{2}n{3}{2}}
+		\toprule
+		& \multicolumn{2}{c}{Hiver} & \multicolumn{2}{c}{Été} \\
+		{$\Delta ex \,[\mathrm{kJ/kg}]$} & {$\Delta
+		T\,[\degree\mathrm{C}]$} & {$\Delta
+		p\,[\mathrm{mm}_{\text{CE}}]$} & {$\Delta
+		T\,[\degree\mathrm{C}]$} & {$\Delta
+		p\,[\mathrm{mm}_{\text{CE}}]$}  \\
+		\midrule
+		$0.1$ & $7.42$ & $13.12$ & $-7.62$ & $11.68$ \\
+		$0.25$ & $11.79$ & $32.84$ & $-12.00$ & $29.23$ \\
+		$0.5$ & $16.76$ & $65.78$ & $-16.87$ & $58.53$ \\
+		$0.75$ & $20.62$ & $98.82$ & $-20.57$ & $87.92$ \\
+		$1$ & $23.90$ & $131.97$ & $-23.67$ & $117.40$ \\
+		$1.5$ & $29.46$ & $198.59$ & $-28.81$ & $176.60$ \\
+		$2$ & $34.20$ & $265.63$ & $-33.10$ & $263.13$ \\
+		\bottomrule
+	\end{tabular}
+	\label{tab:exemple-calcul-1}
+\end{table} Ces résultats nous permettent de voir que, été comme hiver, une même
+variation d'exergie spécifique apportée à l'air humide le sera avec une
+variation de température plus faible, relativement, que la variation de pression
+correspondante. Dis autrement, eu égard aux pertes de charges typiquement
+rencontrées dans les systèmes de traitement d'air, ces dernières produisent des
+variations d'exergie spécifique très inférieures à celles générées par les
+variations de température usuelles auxquelles l'air est soumis. C'est pour cette
+raison que la plupart des études traitant d'applications pratiques de l'analyse
+exergétique aux systèmes de traitement de l'air font explicitement l'hypothèse
+que l'exergie spécifique mécanique \eqref{eq:exergie-m-1} est négligeable devant
+les autres composants de l'exergie spécifique \eqref{eq:exergie-specifique}.
 
 %Dans le cas d'un bâtiment par exemple, la nécessité de chauffer ou de refroidir
 %l'air de ventilation, de l'humidifier ou de le déshumidifier, dépend de la
@@ -237,6 +312,18 @@ d'après \eqref{eq:exergie-th-1}, \eqref{eq:exergie-m-1} et
 %intéressant d'utilisation de l'analyse exergétique parce qu'elles consomment
 %justement de l'air venant de l’extérieur, et dont l'exergie spécifique est
 %nulle par définition.}
+
+\subsection{Performances exergétiques des systèmes de traitement de l'air}
+
+\section{Les pièges de l'analyse exergétique}
+
+\subsection{Connaissance de l'état de référence}
+
+\subsection{Influence des incertitudes de mesures}
+
+\subsection{Le problème de l'état de référence de l'eau}
+
+\section{Conclusion}
 
 \section*{Notations} \label{table-notations}
 
